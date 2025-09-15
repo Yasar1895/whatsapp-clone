@@ -1,67 +1,54 @@
-import React, { useEffect, useRef, useState } from 'react'
-import users from '../data/users.js'
-import initialMessages from '../data/messages.js'
-import { loadState, saveState } from '../utils/storage.js'
-import Message from './Message.jsx'
-import ChatHeader from './ChatHeader.jsx'
-import Compose from './Compose.jsx'
+import React, { useState, useEffect } from "react";
+import Message from "./Message.jsx";
+import Compose from "./Compose.jsx";
 
-export default function ChatWindow({ conversationId }) {
-  const [messagesMap, setMessagesMap] = useState(() => {
-    const persisted = loadState()
-    return persisted?.messages || initialMessages
-  })
-
-  const scrollRef = useRef(null)
-
-  useEffect(() => {
-    // persist on changes
-    saveState({ messages: messagesMap })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messagesMap])
-
-  // scroll to bottom when messages change or conversationId change
-  useEffect(() => {
-    const el = scrollRef.current
-    if (el) el.scrollTop = el.scrollHeight
-  }, [messagesMap, conversationId])
-
-  if (!conversationId) {
-    return (
-      <div className="chat">
-        <ChatHeader user={null} />
-        <div style={{flex:1, display:'flex', alignItems:'center', justifyContent:'center', color:'#666'}}>Select a conversation</div>
-      </div>
-    )
-  }
-
-  const user = users.find(u => u.id === conversationId)
-  const thread = messagesMap[conversationId] || []
+function ChatWindow({ user, messages: initialMessages }) {
+  const [messages, setMessages] = useState(initialMessages);
 
   const handleSend = (text) => {
-    const id = 'm' + Math.random().toString(36).slice(2,9)
-    const msg = { id, from: 'u1', to: conversationId, text, ts: Date.now() }
-    const next = { ...messagesMap, [conversationId]: [...thread, msg] }
-    setMessagesMap(next)
+    const newMsg = {
+      from: "Me",
+      text,
+      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    };
+    setMessages((prev) => [...prev, newMsg]);
 
-    // simulate reply (simple)
+    // Fake reply after 1.5 sec
     setTimeout(() => {
-      const replyId = 'm' + Math.random().toString(36).slice(2,9)
-      const reply = { id: replyId, from: conversationId, to: 'u1', text: "👍 Got it", ts: Date.now() }
-      setMessagesMap(prev => ({ ...prev, [conversationId]: [...(prev[conversationId]||[]), reply] }))
-    }, 1200)
-  }
+      const replies = [
+        "Sounds good!",
+        "Okay 👍",
+        "Haha 😂",
+        "I’ll check and let you know",
+        "Cool 😎",
+        "Exactly!",
+        "Really?",
+        "Got it ✅"
+      ];
+      const replyMsg = {
+        from: user.name,
+        text: replies[Math.floor(Math.random() * replies.length)],
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      };
+      setMessages((prev) => [...prev, replyMsg]);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    setMessages(initialMessages);
+  }, [user, initialMessages]);
 
   return (
-    <div className="chat">
-      <ChatHeader user={user} />
-
-      <div className="chat-messages" ref={scrollRef}>
-        {thread.length === 0 && <div style={{color:'#777'}}>No messages yet. Say hi!</div>}
-        {thread.map(m => <Message key={m.id} msg={m} me={m.from === 'u1'} />)}
+    <div className="chat-window">
+      <div className="chat-header">{user.name}</div>
+      <div className="chat-messages">
+        {messages.map((msg, idx) => (
+          <Message key={idx} msg={msg} />
+        ))}
       </div>
-
       <Compose onSend={handleSend} />
     </div>
-  )
+  );
 }
+
+export default ChatWindow;
