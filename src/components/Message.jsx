@@ -1,10 +1,15 @@
-import React from 'react'
+import React from "react";
 
-export default function Message({ msg, me }) {
+function Message({ msg }) {
+  const isMe = msg.from === "Me";
   return (
-    <div className={`message ${me ? 'me' : 'them'}`}>
-      <div>{msg.text}</div>
-      <span className="ts">{new Date(msg.ts).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</span>
+    <div className={`message ${isMe ? "me" : "other"}`}>
+      <div className="bubble">
+        <p>{msg.text}</p>
+        <span className="time">{msg.time}</span>
+      </div>
     </div>
-  )
+  );
 }
+
+export default Message;
