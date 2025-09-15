@@ -2,32 +2,32 @@ const users = [
   {
     id: 1,
     name: "John Cena",
-    avatar: "https://i.pravatar.cc/150?img=11"
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/6/6d/John_Cena_2012.jpg"
   },
   {
     id: 2,
     name: "The Undertaker",
-    avatar: "https://i.pravatar.cc/150?img=12"
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/0/02/The_Undertaker_WM31.jpg"
   },
   {
     id: 3,
     name: "The Rock",
-    avatar: "https://i.pravatar.cc/150?img=13"
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/f/f6/Dwayne_Johnson_2%2C_2013.jpg"
   },
   {
     id: 4,
     name: "Stone Cold",
-    avatar: "https://i.pravatar.cc/150?img=14"
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/7/77/Stone_Cold_Steve_Austin_2010.jpg"
   },
   {
     id: 5,
     name: "Triple H",
-    avatar: "https://i.pravatar.cc/150?img=15"
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Triple_H_2017.jpg"
   },
   {
     id: 6,
     name: "Shawn Michaels",
-    avatar: "https://i.pravatar.cc/150?img=16"
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Shawn_Michaels_WM31_Axxess.jpg"
   }
 ];
 
