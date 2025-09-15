@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
-import Sidebar from './components/Sidebar.jsx'
-import ChatWindow from './components/ChatWindow.jsx'
+import React, { useState } from "react";
+import Sidebar from "./components/Sidebar.jsx";
+import ChatWindow from "./components/ChatWindow.jsx";
+import users from "./data/users.js";
+import messages from "./data/messages.js";
 
-export default function App() {
-  const [activeConv, setActiveConv] = useState(null) // conversationId (user id)
+function App() {
+  const [selectedUser, setSelectedUser] = useState(null);
 
   return (
     <div className="app">
-      <Sidebar onSelectConversation={(u) => setActiveConv(u.id)} activeId={activeConv} />
-      <ChatWindow conversationId={activeConv} />
+      <Sidebar users={users} onSelectUser={setSelectedUser} />
+      {selectedUser ? (
+        <ChatWindow
+          user={selectedUser}
+          messages={messages[selectedUser.id] || []}
+        />
+      ) : (
+        <div className="empty">Select a conversation</div>
+      )}
     </div>
-  )
+  );
 }
+
+export default App;
