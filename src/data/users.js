@@ -1,29 +1,19 @@
-// sample users (you can change avatars to your own)
 const users = [
   {
-    id: 'u1',
-    name: 'You',
-    phone: '+91 98765 43210',
-    avatar: 'https://i.pravatar.cc/150?img=12' // current user
+    id: 1,
+    name: "Alice",
+    avatar: "https://i.pravatar.cc/150?img=1"
   },
   {
-    id: 'u2',
-    name: 'Aisha Khan',
-    avatar: 'https://i.pravatar.cc/150?img=5',
-    about: 'Available'
+    id: 2,
+    name: "Bob",
+    avatar: "https://i.pravatar.cc/150?img=2"
   },
   {
-    id: 'u3',
-    name: 'Rahul Verma',
-    avatar: 'https://i.pravatar.cc/150?img=6',
-    about: 'At work'
-  },
-  {
-    id: 'u4',
-    name: 'Family Group',
-    avatar: 'https://i.pravatar.cc/150?img=15',
-    about: '3 members'
+    id: 3,
+    name: "Charlie",
+    avatar: "https://i.pravatar.cc/150?img=3"
   }
-]
+];
 
-export default users
+export default users;
