@@ -56,12 +56,12 @@ body, html, #root {
   color: gray;
 }
 
-/* Avatar */
+/* Avatar (small circle) */
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background: #ccc;
+  object-fit: cover;
   flex-shrink: 0;
 }
 
@@ -74,10 +74,20 @@ body, html, #root {
 }
 
 .chat-header {
+  display: flex;
+  align-items: center;
   background: #075e54;
   color: white;
   padding: 12px;
   font-weight: bold;
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
 }
 
 .chat-messages {
